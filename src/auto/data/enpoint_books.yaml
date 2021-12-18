@@ -1,0 +1,7 @@
+API_BOOKS:
+  BASE_URL: https://fakerestapi.azurewebsites.net
+  ENDPOINT: /api/v1/Books
+
+STATUS_CODES:
+  SUCCESS: '200'
+  NOT_FOUND: '404'

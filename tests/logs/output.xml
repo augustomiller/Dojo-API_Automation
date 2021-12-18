@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.2 (Python 3.8.0 on win32)" generated="20211217 20:15:53.614" rpa="false" schemaversion="2">
+<suite id="s1" name="Apiautomation" source="C:\Users\User\Desktop\dojo - automation api\tests\apiautomation.robot">
+<test id="s1-t1" name="Adicionar um novo livros">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>booksAPI</arg>
+<arg>${BASE_URL}</arg>
+<arg>disable_warnings=${True}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20211217 20:15:53.828" level="INFO">Creating Session using : alias=booksAPI, url=https://fakerestapi.azurewebsites.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20211217 20:15:53.828" endtime="20211217 20:15:53.828"/>
+</kw>
+<kw name="Create Directory" library="OperatingSystem">
+<var>${HEADERS}</var>
+<arg>content-type=application/json</arg>
+<doc>Creates the specified directory.</doc>
+<msg timestamp="20211217 20:15:53.829" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\User\Desktop\dojo - automation api\content-type=application\json"&gt;C:\Users\User\Desktop\dojo - automation api\content-type=application\json&lt;/a&gt;' already exists.</msg>
+<msg timestamp="20211217 20:15:53.829" level="INFO">${HEADERS} = None</msg>
+<status status="PASS" starttime="20211217 20:15:53.829" endtime="20211217 20:15:53.829"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${RESPOSTA}</var>
+<arg>booksAPI</arg>
+<arg>/api/v1/Books</arg>
+<arg>json=${JSON_BODY}</arg>
+<arg>headers=${HEADERS}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20211217 20:15:54.736" level="INFO">POST Request : url=https://fakerestapi.azurewebsites.net/api/v1/Books 
+ path_url=/api/v1/Books 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '167', 'Content-Type': 'application/json'} 
+ body=b'{"id": "787799", "title": "Livro do Denzel", "description": "My Nigga", "pageCount": "123", "excerpt": "voluptate sunt est", "publishDate": "2021-12-17T09:39:01.228Z"}' 
+ </msg>
+<msg timestamp="20211217 20:15:54.736" level="INFO">POST Response : url=https://fakerestapi.azurewebsites.net/api/v1/Books 
+ status=200, reason=OK 
+ headers={'Transfer-Encoding': 'chunked', 'Content-Type': 'application/json; charset=utf-8; v=1.0', 'Server': 'Kestrel', 'api-supported-versions': '1.0', 'Date': 'Fri, 17 Dec 2021 23:15:53 GMT'} 
+ body={"id":787799,"title":"Livro do Denzel","description":"My Nigga","pageCount":123,"excerpt":"voluptate sunt est","publishDate":"2021-12-17T09:39:01.228Z"} 
+ </msg>
+<msg timestamp="20211217 20:15:54.737" level="INFO">${RESPOSTA} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211217 20:15:53.830" endtime="20211217 20:15:54.737"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${RESPOSTA.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20211217 20:15:54.739" level="INFO">{"id":787799,"title":"Livro do Denzel","description":"My Nigga","pageCount":123,"excerpt":"voluptate sunt est","publishDate":"2021-12-17T09:39:01.228Z"}</msg>
+<status status="PASS" starttime="20211217 20:15:54.737" endtime="20211217 20:15:54.739"/>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<arg>${RESPOSTA.json()}</arg>
+<arg>id</arg>
+<arg>${JSON_BODY.id}</arg>
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<status status="PASS" starttime="20211217 20:15:54.739" endtime="20211217 20:15:54.741"/>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<arg>${RESPOSTA.json()}</arg>
+<arg>title</arg>
+<arg>${JSON_BODY.title}</arg>
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<status status="PASS" starttime="20211217 20:15:54.742" endtime="20211217 20:15:54.743"/>
+</kw>
+<kw name="Dictionary Should Contain Item" library="Collections">
+<arg>${RESPOSTA.json()}</arg>
+<arg>pageCount</arg>
+<arg>${JSON_BODY.pageCount}</arg>
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<status status="PASS" starttime="20211217 20:15:54.744" endtime="20211217 20:15:54.745"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${RESPOSTA.json()["description"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<msg timestamp="20211217 20:15:54.746" level="INFO">Length is 8</msg>
+<status status="PASS" starttime="20211217 20:15:54.745" endtime="20211217 20:15:54.746"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${RESPOSTA.json()["publishDate"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<msg timestamp="20211217 20:15:54.747" level="INFO">Length is 24</msg>
+<status status="PASS" starttime="20211217 20:15:54.746" endtime="20211217 20:15:54.747"/>
+</kw>
+<tag>ADICIONA</tag>
+<status status="PASS" starttime="20211217 20:15:53.827" endtime="20211217 20:15:54.747"/>
+</test>
+<doc>Aqui estarão presentes os testes de API do Dojo</doc>
+<status status="PASS" starttime="20211217 20:15:53.616" endtime="20211217 20:15:54.749"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">ADICIONA</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Apiautomation">Apiautomation</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
