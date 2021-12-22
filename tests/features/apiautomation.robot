@@ -18,21 +18,21 @@ ${BASE_URL}                       https://fakerestapi.azurewebsites.net
 
 *** Test Cases ***
 Cenario: Buscar a listagem de todos os livros (GET em todos os livros)
-    [Tags]            TESTE_1
+    [Tags]            GET_ALL_BOOKS
     Requisitar todos os livros
     Conferir o status code      200
     Conferir o reason           OK
     Conferir se retorna uma lista com "200" livros
 
 Cenario: Buscar um livro específico(GET em um Livro específico)
-    [Tags]            TESTE_2
+    [Tags]            GET_A_BOOK
     Requisitar o livro "20"
     Conferir o status code      200
     Conferir o reason           OK
     Conferir se retorna todos os dados corretos do livro 20
 
 Cenario: Cadastrar um novo livro (POST)
-    [Tags]          TESTE_3
+    [Tags]          REGISTER_A_BOOK
     Cadastrar um novo livro
     Conferir o status code      200
     Conferir o reason           OK
