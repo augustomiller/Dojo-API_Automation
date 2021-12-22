@@ -1,94 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 4.1.2 (Python 3.8.0 on win32)" generated="20211217 20:15:53.614" rpa="false" schemaversion="2">
-<suite id="s1" name="Apiautomation" source="C:\Users\User\Desktop\dojo - automation api\tests\apiautomation.robot">
-<test id="s1-t1" name="Adicionar um novo livros">
+<robot generator="Robot 4.0.3 (Python 3.10.0 on win32)" generated="20211222 13:31:49.170" rpa="false" schemaversion="2">
+<suite id="s1" name="Apiautomation" source="C:\Users\user\Desktop\API DOJO\Dojo-API_Automation\tests\features\apiautomation.robot">
+<test id="s1-t1" name="Cenario: Cadastrar um novo livro (POST)">
+<kw name="Conectar com a minha API" library="kws_apiautomation" type="SETUP">
 <kw name="Create Session" library="RequestsLibrary">
 <arg>booksAPI</arg>
-<arg>${BASE_URL}</arg>
+<arg>${API_BOOKS.BASE_URL}</arg>
 <arg>disable_warnings=${True}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<msg timestamp="20211217 20:15:53.828" level="INFO">Creating Session using : alias=booksAPI, url=https://fakerestapi.azurewebsites.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20211217 20:15:53.828" endtime="20211217 20:15:53.828"/>
+<msg timestamp="20211222 13:31:49.556" level="INFO">Creating Session using : alias=booksAPI, url=https://fakerestapi.azurewebsites.net, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20211222 13:31:49.555" endtime="20211222 13:31:49.557"/>
 </kw>
 <kw name="Create Directory" library="OperatingSystem">
 <var>${HEADERS}</var>
 <arg>content-type=application/json</arg>
 <doc>Creates the specified directory.</doc>
-<msg timestamp="20211217 20:15:53.829" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\User\Desktop\dojo - automation api\content-type=application\json"&gt;C:\Users\User\Desktop\dojo - automation api\content-type=application\json&lt;/a&gt;' already exists.</msg>
-<msg timestamp="20211217 20:15:53.829" level="INFO">${HEADERS} = None</msg>
-<status status="PASS" starttime="20211217 20:15:53.829" endtime="20211217 20:15:53.829"/>
+<msg timestamp="20211222 13:31:49.557" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\user\Desktop\API DOJO\Dojo-API_Automation\content-type=application\json"&gt;C:\Users\user\Desktop\API DOJO\Dojo-API_Automation\content-type=application\json&lt;/a&gt;' already exists.</msg>
+<msg timestamp="20211222 13:31:49.558" level="INFO">${HEADERS} = None</msg>
+<status status="PASS" starttime="20211222 13:31:49.557" endtime="20211222 13:31:49.558"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${HEADERS}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20211222 13:31:49.558" level="INFO">${HEADERS} = None</msg>
+<status status="PASS" starttime="20211222 13:31:49.558" endtime="20211222 13:31:49.558"/>
+</kw>
+<status status="PASS" starttime="20211222 13:31:49.555" endtime="20211222 13:31:49.558"/>
+</kw>
+<kw name="Cadastrar um novo livro" library="kws_apiautomation">
+<kw name="Format String" library="String">
+<var>${JSON}</var>
+<arg>${DIR.JSON}</arg>
+<doc>Formats a ``template`` using the given ``positional`` and ``named`` arguments.</doc>
+<msg timestamp="20211222 13:31:49.563" level="INFO" html="true">Reading template from file &lt;a href="C:\Users\user\Desktop\API DOJO\Dojo-API_Automation\src\auto\data\cadastro.json"&gt;C:\Users\user\Desktop\API DOJO\Dojo-API_Automation\src\auto\data\cadastro.json&lt;/a&gt;.</msg>
+<msg timestamp="20211222 13:31:49.563" level="INFO">${JSON} = {
+    "id": 201,
+    "title": "Dumbledores do Nordeste",
+    "description": "Nois que voa bruxão",
+    "pageCount": 100,
+    "excerpt": "Lorem Ipsum is simply dummy text of the printing and typesettin...</msg>
+<status status="PASS" starttime="20211222 13:31:49.560" endtime="20211222 13:31:49.563"/>
+</kw>
+<kw name="Convert String to JSON" library="JSONLibrary">
+<var>${SCHEMA_BODY}</var>
+<arg>${JSON}</arg>
+<doc>Convert String to JSON object</doc>
+<msg timestamp="20211222 13:31:49.565" level="INFO">${SCHEMA_BODY} = {'id': 201, 'title': 'Dumbledores do Nordeste', 'description': 'Nois que voa bruxão', 'pageCount': 100, 'excerpt': "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ips...</msg>
+<status status="PASS" starttime="20211222 13:31:49.564" endtime="20211222 13:31:49.565"/>
 </kw>
 <kw name="POST On Session" library="RequestsLibrary">
 <var>${RESPOSTA}</var>
 <arg>booksAPI</arg>
-<arg>/api/v1/Books</arg>
-<arg>json=${JSON_BODY}</arg>
-<arg>headers=${HEADERS}</arg>
+<arg>${API_BOOKS.ENDPOINT}</arg>
+<arg>json=${SCHEMA_BODY}</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<msg timestamp="20211217 20:15:54.736" level="INFO">POST Request : url=https://fakerestapi.azurewebsites.net/api/v1/Books 
+<msg timestamp="20211222 13:31:50.515" level="INFO">POST Request : url=https://fakerestapi.azurewebsites.net/api/v1/Books 
  path_url=/api/v1/Books 
- headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '167', 'Content-Type': 'application/json'} 
- body=b'{"id": "787799", "title": "Livro do Denzel", "description": "My Nigga", "pageCount": "123", "excerpt": "voluptate sunt est", "publishDate": "2021-12-17T09:39:01.228Z"}' 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '740', 'Content-Type': 'application/json'} 
+ body=b'{"id": 201, "title": "Dumbledores do Nordeste", "description": "Nois que voa brux\\u00e3o", "pageCount": 100, "excerpt": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "publishDate": "2021-12-22T14:27:02.464Z"}' 
  </msg>
-<msg timestamp="20211217 20:15:54.736" level="INFO">POST Response : url=https://fakerestapi.azurewebsites.net/api/v1/Books 
+<msg timestamp="20211222 13:31:50.515" level="INFO">POST Response : url=https://fakerestapi.azurewebsites.net/api/v1/Books 
  status=200, reason=OK 
- headers={'Transfer-Encoding': 'chunked', 'Content-Type': 'application/json; charset=utf-8; v=1.0', 'Server': 'Kestrel', 'api-supported-versions': '1.0', 'Date': 'Fri, 17 Dec 2021 23:15:53 GMT'} 
- body={"id":787799,"title":"Livro do Denzel","description":"My Nigga","pageCount":123,"excerpt":"voluptate sunt est","publishDate":"2021-12-17T09:39:01.228Z"} 
+ headers={'Transfer-Encoding': 'chunked', 'Content-Type': 'application/json; charset=utf-8; v=1.0', 'Server': 'Kestrel', 'api-supported-versions': '1.0', 'Date': 'Wed, 22 Dec 2021 16:31:49 GMT'} 
+ body={"id":201,"title":"Dumbledores do Nordeste","description":"Nois que voa bruxão","pageCount":100,"excerpt":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.","publishDate":"2021-12-22T14:27:02.464Z"} 
  </msg>
-<msg timestamp="20211217 20:15:54.737" level="INFO">${RESPOSTA} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20211217 20:15:53.830" endtime="20211217 20:15:54.737"/>
+<msg timestamp="20211222 13:31:50.515" level="INFO">${RESPOSTA} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211222 13:31:49.566" endtime="20211222 13:31:50.515"/>
 </kw>
 <kw name="Log" library="BuiltIn">
 <arg>${RESPOSTA.text}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20211217 20:15:54.739" level="INFO">{"id":787799,"title":"Livro do Denzel","description":"My Nigga","pageCount":123,"excerpt":"voluptate sunt est","publishDate":"2021-12-17T09:39:01.228Z"}</msg>
-<status status="PASS" starttime="20211217 20:15:54.737" endtime="20211217 20:15:54.739"/>
+<msg timestamp="20211222 13:31:50.517" level="INFO">{"id":201,"title":"Dumbledores do Nordeste","description":"Nois que voa bruxão","pageCount":100,"excerpt":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.","publishDate":"2021-12-22T14:27:02.464Z"}</msg>
+<status status="PASS" starttime="20211222 13:31:50.516" endtime="20211222 13:31:50.517"/>
 </kw>
-<kw name="Dictionary Should Contain Item" library="Collections">
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${RESPOSTA}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20211222 13:31:50.518" level="INFO">${RESPOSTA} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211222 13:31:50.517" endtime="20211222 13:31:50.518"/>
+</kw>
+<status status="PASS" starttime="20211222 13:31:49.559" endtime="20211222 13:31:50.518"/>
+</kw>
+<kw name="Conferir o status code" library="kws_apiautomation">
+<arg>200</arg>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${RESPOSTA.status_code}</arg>
+<arg>${STATUS_CODE}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20211222 13:31:50.521" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20211222 13:31:50.520" endtime="20211222 13:31:50.521"/>
+</kw>
+<status status="PASS" starttime="20211222 13:31:50.519" endtime="20211222 13:31:50.522"/>
+</kw>
+<kw name="Conferir o reason" library="kws_apiautomation">
+<arg>OK</arg>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${RESPOSTA.reason}</arg>
+<arg>${REASON}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20211222 13:31:50.523" endtime="20211222 13:31:50.525"/>
+</kw>
+<status status="PASS" starttime="20211222 13:31:50.522" endtime="20211222 13:31:50.525"/>
+</kw>
+<kw name="Conferir se retorna todos os dados cadastrados do livro &quot;201&quot;" library="kws_apiautomation" sourcename="Conferir se retorna todos os dados cadastrados do livro &quot;${ID_LIVRO}&quot;">
+<kw name="Set Variable" library="BuiltIn">
+<var>${JSON_DATA}</var>
 <arg>${RESPOSTA.json()}</arg>
-<arg>id</arg>
-<arg>${JSON_BODY.id}</arg>
-<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
-<status status="PASS" starttime="20211217 20:15:54.739" endtime="20211217 20:15:54.741"/>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211222 13:31:50.528" level="INFO">${JSON_DATA} = {'id': 201, 'title': 'Dumbledores do Nordeste', 'description': 'Nois que voa bruxão', 'pageCount': 100, 'excerpt': "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ips...</msg>
+<status status="PASS" starttime="20211222 13:31:50.527" endtime="20211222 13:31:50.528"/>
 </kw>
-<kw name="Dictionary Should Contain Item" library="Collections">
-<arg>${RESPOSTA.json()}</arg>
-<arg>title</arg>
-<arg>${JSON_BODY.title}</arg>
-<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
-<status status="PASS" starttime="20211217 20:15:54.742" endtime="20211217 20:15:54.743"/>
+<kw name="Get From Dictionary" library="Collections">
+<var>${ID}</var>
+<arg>${JSON_DATA}</arg>
+<arg>${DATA.ID}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<msg timestamp="20211222 13:31:50.529" level="INFO">${ID} = 201</msg>
+<status status="PASS" starttime="20211222 13:31:50.528" endtime="20211222 13:31:50.529"/>
 </kw>
-<kw name="Dictionary Should Contain Item" library="Collections">
-<arg>${RESPOSTA.json()}</arg>
-<arg>pageCount</arg>
-<arg>${JSON_BODY.pageCount}</arg>
-<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
-<status status="PASS" starttime="20211217 20:15:54.744" endtime="20211217 20:15:54.745"/>
+<kw name="Get From Dictionary" library="Collections">
+<var>${TITLE}</var>
+<arg>${JSON_DATA}</arg>
+<arg>${DATA.TITLE}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<msg timestamp="20211222 13:31:50.531" level="INFO">${TITLE} = Dumbledores do Nordeste</msg>
+<status status="PASS" starttime="20211222 13:31:50.530" endtime="20211222 13:31:50.532"/>
 </kw>
-<kw name="Should Not Be Empty" library="BuiltIn">
-<arg>${RESPOSTA.json()["description"]}</arg>
-<doc>Verifies that the given item is not empty.</doc>
-<msg timestamp="20211217 20:15:54.746" level="INFO">Length is 8</msg>
-<status status="PASS" starttime="20211217 20:15:54.745" endtime="20211217 20:15:54.746"/>
+<kw name="Get From Dictionary" library="Collections">
+<var>${DESCRIPTION}</var>
+<arg>${JSON_DATA}</arg>
+<arg>${DATA.DESCRIPTION}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<msg timestamp="20211222 13:31:50.533" level="INFO">${DESCRIPTION} = Nois que voa bruxão</msg>
+<status status="PASS" starttime="20211222 13:31:50.532" endtime="20211222 13:31:50.533"/>
 </kw>
-<kw name="Should Not Be Empty" library="BuiltIn">
-<arg>${RESPOSTA.json()["publishDate"]}</arg>
-<doc>Verifies that the given item is not empty.</doc>
-<msg timestamp="20211217 20:15:54.747" level="INFO">Length is 24</msg>
-<status status="PASS" starttime="20211217 20:15:54.746" endtime="20211217 20:15:54.747"/>
+<kw name="Get From Dictionary" library="Collections">
+<var>${PUBLISH_DATE}</var>
+<arg>${JSON_DATA}</arg>
+<arg>${DATA.PUBLISH_DATE}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<msg timestamp="20211222 13:31:50.535" level="INFO">${PUBLISH_DATE} = 2021-12-22T14:27:02.464Z</msg>
+<status status="PASS" starttime="20211222 13:31:50.534" endtime="20211222 13:31:50.535"/>
 </kw>
-<tag>ADICIONA</tag>
-<status status="PASS" starttime="20211217 20:15:53.827" endtime="20211217 20:15:54.747"/>
+<status status="PASS" starttime="20211222 13:31:50.526" endtime="20211222 13:31:50.535"/>
+</kw>
+<tag>TESTE_3</tag>
+<status status="PASS" starttime="20211222 13:31:49.554" endtime="20211222 13:31:50.536"/>
 </test>
 <doc>Aqui estarão presentes os testes de API do Dojo</doc>
-<status status="PASS" starttime="20211217 20:15:53.616" endtime="20211217 20:15:54.749"/>
+<status status="PASS" starttime="20211222 13:31:49.172" endtime="20211222 13:31:50.537"/>
 </suite>
 <statistics>
 <total>
 <stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="1" fail="0" skip="0">ADICIONA</stat>
+<stat pass="1" fail="0" skip="0">TESTE_3</stat>
 </tag>
 <suite>
 <stat pass="1" fail="0" skip="0" id="s1" name="Apiautomation">Apiautomation</stat>

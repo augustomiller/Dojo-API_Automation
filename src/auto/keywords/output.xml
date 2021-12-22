@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.0.3 (Python 3.10.0 on win32)" generated="20211222 11:16:12.287" rpa="false" schemaversion="2">
+<suite id="s1" name="Robot Interactive Console" source="c:\Users\user\.vscode\extensions\robocorp.robotframework-lsp-0.35.0\src\robotframework_ls\vendored\robotframework_interactive\robot_interactive_console.robot">
+<test id="s1-t1" name="Default Task/Test">
+<kw name="Interpreter Main Loop" library="MainLoop">
+<status status="PASS" starttime="20211222 11:16:12.390" endtime="20211222 11:16:14.740"/>
+</kw>
+<status status="PASS" starttime="20211222 11:16:12.388" endtime="20211222 11:16:14.741"/>
+</test>
+<status status="PASS" starttime="20211222 11:16:12.293" endtime="20211222 11:16:14.746"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Robot Interactive Console">Robot Interactive Console</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

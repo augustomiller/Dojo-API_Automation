@@ -8,3 +8,4 @@ Library                 OperatingSystem
 Resource                ../auto/keywords/kws_apiautomation.robot
 
 Variables               ../auto/data/enpoint_books.yaml
+Variables               ../auto/data/apiautomation.yaml
